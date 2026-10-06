@@ -1,0 +1,551 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Font Pairing: Space Grotesk (Display) & Inter (Body) */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  /* Dark Base */
+  html {
+    background-color: #050505;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #050505;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Display Font for Headings */
+  h1, h2, h3, .font-display {
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  }
+
+  /* Code / Monospace elements */
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom Selection Color */
+::selection {
+  background-color: rgba(34, 211, 238, 0.3);
+  color: #22d3ee;
+}
+
+::-moz-selection {
+  background-color: rgba(34, 211, 238, 0.3);
+  color: #22d3ee;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 4px;
+  border: 1px solid rgba(34, 211, 238, 0.15);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee;
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+
+/* Cyber Grid Backgrounds */
+.cyber-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.cyber-grid-dense {
+  background-image: 
+    radial-gradient(rgba(34, 211, 238, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(13, 13, 13, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: #0D0D0D;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(34, 211, 238, 0.45);
+  box-shadow: 0 0 25px -5px rgba(34, 211, 238, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Subtle Glow Text */
+.glow-text {
+  text-shadow: 0 0 20px rgba(34, 211, 238, 0.5);
+}
+
+/* Keyboard focus accessibility states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 3px;
+}
+
+/* Reduced motion accessibility support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Magnetic Cursor & Touch Fallbacks */
+.magnetic-wrapper {
+  transform: translateZ(0);
+}
+
+.magnetic-pull {
+  display: inline-block;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+@media (pointer: coarse) {
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ISOMETRIC 3D LAPTOP KEYBOARD (KeyboardSocials)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* 1. Perspective Wrapper & Tilt */
+.kb-perspective-wrapper {
+  perspective: 760px;
+  perspective-origin: center center;
+  transform-style: preserve-3d;
+  pointer-events: none !important;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.kb-tilted-deck {
+  transform: rotateX(58deg) rotateZ(-34deg);
+  transform-style: preserve-3d;
+  margin: -24px 0;
+  border: 1px solid #1a2226;
+  background: linear-gradient(155deg, #111619 0%, #07090b 100%);
+  border-radius: 18px;
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.8),
+    0 25px 50px -10px rgba(0, 0, 0, 0.85),
+    0 0 30px rgba(34, 211, 238, 0.04);
+  will-change: transform;
+  pointer-events: none !important;
+}
+
+@media (max-width: 639px) {
+  .kb-tilted-deck {
+    transform: rotateX(50deg) rotateZ(-26deg);
+    margin: -16px 0;
+  }
+}
+
+/* 2. Critical 3D Preservation Chain (Deck -> Grid -> Base -> Face) */
+.kb-grid,
+.kb-key-base,
+.kb-key-face {
+  transform-style: preserve-3d;
+}
+
+/* Explicit CSS Grid placement support */
+.kb-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, auto);
+  column-gap: 7px;
+  row-gap: 10px;
+  pointer-events: none !important;
+}
+
+.kb-grid.kb-grid-narrow {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 7px;
+  pointer-events: none !important;
+}
+
+.kb-grid > .col-start-1 { grid-column-start: 1; }
+.kb-grid > .col-start-2 { grid-column-start: 2; }
+.kb-grid > .col-start-3 { grid-column-start: 3; }
+.kb-grid > .col-start-4 { grid-column-start: 4; }
+.kb-grid > .col-start-5 { grid-column-start: 5; }
+.kb-grid > .col-start-6 { grid-column-start: 6; }
+.kb-grid > .row-start-1 { grid-row-start: 1; }
+.kb-grid > .row-start-2 { grid-row-start: 2; }
+.kb-grid > .row-start-3 { grid-row-start: 3; }
+.kb-grid > .row-start-4 { grid-row-start: 4; }
+
+/* Decorative key bases & all non-interactive children must never intercept clicks and have low lift (4px) */
+.kb-key-base:not(.kb-interactive-key),
+.kb-key-base:not(.kb-interactive-key) *,
+.kb-decorative-key,
+.kb-decorative-key * {
+  pointer-events: none !important;
+  z-index: 1;
+}
+
+.kb-decorative-key .kb-key-face,
+.kb-key-base:not(.kb-interactive-key) .kb-key-face {
+  transform: translateZ(4px) !important;
+  pointer-events: none !important;
+}
+
+/* 3. Realistic Keycap Base (Housing & Side Wall) */
+.kb-key-base {
+  position: relative;
+  background-color: #0a0e10;
+  border-radius: 9px;
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 4px 0 #040607,
+    0 6px 12px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 70ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  user-select: none;
+}
+
+/* Interactive Keys: position relative, higher z-index, expanded 3D hit area */
+.kb-interactive-key {
+  position: relative;
+  z-index: 20;
+  touch-action: manipulation;
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+.kb-interactive-key .kb-key-face {
+  pointer-events: auto;
+}
+
+/* Tooltips and tint overlays must NEVER intercept pointer events */
+.kb-tooltip-flat,
+.kb-tooltip-flat *,
+.kb-key-tint {
+  pointer-events: none !important;
+}
+
+/* Flat transparent expanded hit area (::after, inset: -4px, lifted to top plane) */
+.kb-interactive-key::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  z-index: 25;
+  cursor: pointer;
+  pointer-events: auto !important;
+  border-radius: 12px;
+  transform: translateZ(12px);
+}
+
+/* Linktree key (spanning 2 columns) has massive hit area; do not extend top into Row 2 */
+.kb-interactive-key.col-span-2::after {
+  top: 0 !important;
+}
+
+/* Visible Keyboard Focus */
+.kb-interactive-key:focus-visible {
+  outline: 2px solid #22d3ee;
+  outline-offset: 3px;
+  border-radius: 9px;
+}
+
+/* Pressed Base Shadow Contraction */
+.kb-interactive-key:active,
+.kb-interactive-key.down {
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 1px 0 #040607,
+    0 2px 4px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 4. Realistic Keycap Face (Chamfered Top Plate with translateZ) */
+.kb-key-face {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 7px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #2c3337 0%, #14181a 100%);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transform: translateZ(11px);
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 180ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Linktree key in Row 3 resting lift (6px) to prevent 3D occlusion of Row 2 */
+.kb-interactive-key.col-span-2 .kb-key-face {
+  transform: translateZ(6px);
+}
+
+/* Face Hover Lift (Desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  .kb-interactive-key:hover .kb-key-face {
+    transform: translateZ(14px);
+  }
+}
+
+/* Face Pressed Plunge (70ms tactile descent) */
+.kb-interactive-key:active .kb-key-face,
+.kb-interactive-key.down .kb-key-face {
+  transform: translateZ(3px) !important;
+  transition-duration: 70ms !important;
+}
+
+/* 5. Backlit Legend Styling */
+.kb-key-icon-target {
+  color: #8fd8e6;
+  filter: drop-shadow(0 0 4px rgba(34, 211, 238, 0.6));
+  transition: color 150ms ease, filter 150ms ease;
+}
+
+/* Tint Overlay on Key Face */
+.kb-key-tint {
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+/* 6. GPU-Accelerated Lighting Keyframes on Press */
+@keyframes kbLitGlowAnim {
+  0% {
+    box-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.22),
+      inset 0 -2px 3px rgba(0, 0, 0, 0.5),
+      0 0 0 0 rgba(34, 211, 238, 0);
+  }
+  14% {
+    box-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.45),
+      inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+      0 0 calc(24px * var(--s, 1)) calc(5px * var(--s, 1)) rgba(34, 211, 238, calc(0.8 * var(--s, 1)));
+  }
+  100% {
+    box-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.22),
+      inset 0 -2px 3px rgba(0, 0, 0, 0.5),
+      0 0 0 0 rgba(34, 211, 238, 0);
+  }
+}
+
+@keyframes kbLitTintAnim {
+  0% {
+    background-color: transparent;
+  }
+  14% {
+    background-color: rgba(34, 211, 238, calc(0.22 * var(--s, 1)));
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes kbLitIconAnim {
+  0% {
+    color: #8fd8e6;
+    filter: drop-shadow(0 0 4px rgba(34, 211, 238, 0.6));
+  }
+  14% {
+    color: #f0fdff;
+    filter: drop-shadow(0 0 calc(9px * var(--s, 1)) rgba(34, 211, 238, 1));
+  }
+  100% {
+    color: #8fd8e6;
+    filter: drop-shadow(0 0 4px rgba(34, 211, 238, 0.6));
+  }
+}
+
+/* Applying .lit Keyframe Animations */
+.kb-key-face.lit {
+  animation: kbLitGlowAnim 850ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.kb-key-face.lit .kb-key-tint {
+  animation: kbLitTintAnim 850ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.kb-key-face.lit .kb-key-icon-target {
+  animation: kbLitIconAnim 850ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 7. Flat Counter-Rotated Tooltip Label */
+.kb-tooltip-flat {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, 0) translateZ(30px) rotateZ(34deg) rotateX(-58deg);
+  transform-origin: center bottom;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 160ms cubic-bezier(0.16, 1, 0.3, 1), transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 60;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .kb-interactive-key:hover .kb-tooltip-flat {
+    opacity: 1;
+    transform: translate(-50%, -4px) translateZ(32px) rotateZ(34deg) rotateX(-58deg);
+  }
+}
+
+.kb-interactive-key:focus-visible .kb-tooltip-flat {
+  opacity: 1;
+  transform: translate(-50%, -4px) translateZ(32px) rotateZ(34deg) rotateX(-58deg);
+}
+
+@media (max-width: 639px) {
+  .kb-tooltip-flat {
+    transform: translate(-50%, 0) translateZ(30px) rotateZ(26deg) rotateX(-50deg);
+  }
+  .kb-interactive-key:hover .kb-tooltip-flat,
+  .kb-interactive-key:focus-visible .kb-tooltip-flat {
+    opacity: 1;
+    transform: translate(-50%, -4px) translateZ(32px) rotateZ(26deg) rotateX(-50deg);
+  }
+}
+
+/* 8. Reduced Motion Accessibility Mode */
+@media (prefers-reduced-motion: reduce) {
+  .kb-key-face.lit {
+    animation-duration: 150ms !important;
+  }
+  .kb-key-face.lit .kb-key-tint {
+    animation-duration: 150ms !important;
+  }
+  .kb-key-face.lit .kb-key-icon-target {
+    animation-duration: 150ms !important;
+  }
+  .kb-key-face {
+    transition: none !important;
+  }
+  .kb-tilted-deck {
+    transition: none !important;
+  }
+}
+
+/* 9. Keyboard Shadow Overlay & Sinking Dynamics */
+.kb-shadow-overlay {
+  background: 
+    linear-gradient(95deg, #050505 22%, rgba(5, 5, 5, 0.82) 40%, rgba(5, 5, 5, 0.25) 62%, transparent 78%),
+    linear-gradient(0deg, rgba(5, 5, 5, 0.9) 0%, transparent 30%),
+    linear-gradient(270deg, #050505 0%, transparent 18%),
+    linear-gradient(180deg, #050505 0%, transparent 15%);
+  pointer-events: none !important;
+  border-radius: 20px;
+}
+
+@media (max-width: 1023px) {
+  .kb-shadow-overlay {
+    background: 
+      linear-gradient(180deg, #050505 15%, rgba(5, 5, 5, 0.82) 35%, rgba(5, 5, 5, 0.25) 60%, transparent 80%),
+      linear-gradient(0deg, rgba(5, 5, 5, 0.9) 0%, transparent 30%),
+      linear-gradient(90deg, #050505 0%, transparent 15%),
+      linear-gradient(270deg, #050505 0%, transparent 15%);
+    pointer-events: none !important;
+  }
+}
+
+/* Elevate lit/active key above shadow overlay */
+.kb-interactive-key.lit,
+.kb-interactive-key:active,
+.kb-interactive-key.down {
+  z-index: 30 !important;
+}
+
+/* 10. Atmospheric Haze Drift Keyframes (Translate Only) */
+@keyframes hazeDrift1 {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(24px, -18px, 0);
+  }
+  100% {
+    transform: translate3d(-16px, 14px, 0);
+  }
+}
+
+@keyframes hazeDrift2 {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-20px, 20px, 0);
+  }
+  100% {
+    transform: translate3d(18px, -16px, 0);
+  }
+}
+
+.kb-haze-blob-1 {
+  animation: hazeDrift1 9s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.kb-haze-blob-2 {
+  animation: hazeDrift2 12s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kb-haze-blob-1,
+  .kb-haze-blob-2 {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .kb-haze-blob-1 {
+    filter: blur(20px) !important;
+  }
+  .kb-haze-blob-2 {
+    display: none !important;
+  }
+}
+
+
+

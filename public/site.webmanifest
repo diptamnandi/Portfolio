@@ -1,0 +1,17 @@
+{
+  "name": "Diptam Nandi | Software Engineer & B.Tech CSE",
+  "short_name": "Diptam.Nandi",
+  "description": "Portfolio of Diptam Nandi — B.Tech Computer Science and Engineering student, full-stack builder, and systems engineer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
